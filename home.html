@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIWFHT - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.1/dist/umd/supabase.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -863,39 +864,208 @@
             document.getElementById('clearButton').addEventListener('click', clearAllSelections);
             
             // Logout button
-            document.querySelector('[aria-label="Logout"]').addEventListener('click', () => {
-                localStorage.clear();
-                window.location.href = 'index.html';
+            document.querySelector('[aria-label="Logout"]').addEventListener('click', async () => {
+                await authManager.signOut();
             });
         }
 
         // Initialize the application
-        function init() {
-            // Load user data
-            const userName = localStorage.getItem('userName') || 'User';
-            document.getElementById('user-name').querySelector('p').textContent = userName;
+        async function init() {
+            // Check authentication
+            const isAuthenticated = await authManager.checkAuth();
+            if (!isAuthenticated) return;
+
+            try {
+                // Get user profile
+                console.log('Attempting to load user profile...');
+                const { profile, error } = await authManager.getUserProfile();
+                
+                if (error) {
+                    console.error('Profile fetch error:', error);
+                    
+                    // If error is related to missing profile, try to create one
+                    if (error.code === 'PGRST116' || error.message?.includes('not found')) {
+                        console.log('Profile not found, attempting to create...');
+                        const { user } = await authManager.getUser();
+                        const createResult = await authManager.createOrUpdateProfile({
+                            full_name: user.user_metadata?.full_name || user.email.split('@')[0],
+                            department: '',
+                            role: ''
+                        });
+                        
+                        if (createResult.error) {
+                            console.error('Failed to create profile:', createResult.error);
+                            throw createResult.error;
+                        } else {
+                            console.log('Profile created successfully');
+                            document.getElementById('user-name').querySelector('p').textContent = user.email.split('@')[0];
+                        }
+                    } else {
+                        throw error;
+                    }
+                } else if (profile) {
+                    console.log('Profile loaded successfully:', profile);
+                    document.getElementById('user-name').querySelector('p').textContent = profile.full_name || profile.email.split('@')[0];
+                } else {
+                    console.log('No profile found, creating new one...');
+                    // Create profile if it doesn't exist
+                    const { user } = await authManager.getUser();
+                    const createResult = await authManager.createOrUpdateProfile({
+                        full_name: user.user_metadata?.full_name || user.email.split('@')[0],
+                        department: '',
+                        role: ''
+                    });
+                    
+                    if (createResult.error) {
+                        console.error('Failed to create profile:', createResult.error);
+                        throw createResult.error;
+                    }
+                    
+                    document.getElementById('user-name').querySelector('p').textContent = user.email.split('@')[0];
+                }
+
+                // Load saved data from backend
+                await loadWeeklyScheduleFromBackend();
+                
+                // Render initial UI
+                updateWeekDisplay();
+                await renderEmployeeList();
+                updateSelectionCounter();
+                updateSaveButtonState();
+                
+                // Setup interactions
+                setupEventListeners();
+                setupKeyboardNavigation();
+                
+                // Setup real-time updates
+                setupRealtimeUpdates();
+                
+                // Show welcome message
+                setTimeout(() => {
+                    showToast('Welcome! Select your work from home days for the week.', 'success', 3000);
+                }, 500);
+
+            } catch (error) {
+                console.error('Initialization error:', error);
+                showToast('Failed to load user data. Please refresh the page.', 'error', 5000);
+            }
+        }
+
+        // Backend integration functions
+        async function loadWeeklyScheduleFromBackend() {
+            try {
+                const weekStart = scheduleManager.getWeekStart(currentWeekStart);
+                const { data, error } = await scheduleManager.getWeeklySchedule(weekStart);
+                
+                if (!error && data) {
+                    // Convert WFH days array to day names
+                    const dayMap = { 1: 'monday', 2: 'tuesday', 3: 'wednesday', 4: 'thursday', 5: 'friday' };
+                    selectedDays = data.wfh_days.map(dayNum => dayMap[dayNum]).filter(Boolean);
+                    hasUnsavedChanges = false;
+                }
+            } catch (error) {
+                console.error('Failed to load weekly schedule:', error);
+            }
+        }
+
+        async function saveToBackend() {
+            try {
+                const weekStart = scheduleManager.getWeekStart(currentWeekStart);
+                
+                // Convert day names to numbers (1=Monday, 5=Friday)
+                const dayMap = { 'monday': 1, 'tuesday': 2, 'wednesday': 3, 'thursday': 4, 'friday': 5 };
+                const wfhDays = selectedDays.map(day => dayMap[day]).filter(Boolean);
+                
+                const { data, error } = await scheduleManager.saveWeeklySchedule(weekStart, wfhDays);
+                
+                if (error) throw error;
+                
+                hasUnsavedChanges = false;
+                return data;
+            } catch (error) {
+                console.error('Failed to save to backend:', error);
+                throw error;
+            }
+        }
+
+        async function renderEmployeeList() {
+            try {
+                const currentDate = new Date(currentWeekStart);
+                const { data: weekData } = await scheduleManager.getWeeklyOfficeAttendance(scheduleManager.getWeekStart(currentDate));
+                
+                if (weekData && weekData.length > 0) {
+                    // Update the office attendance view with real data
+                    console.log('Office attendance data:', weekData);
+                    // You can implement the employee list rendering here
+                }
+            } catch (error) {
+                console.error('Failed to load office attendance:', error);
+            }
+        }
+
+        function setupRealtimeUpdates() {
+            // Subscribe to office attendance updates
+            realtimeManager.subscribeToOfficeAttendance(async (payload) => {
+                console.log('Office attendance updated:', payload);
+                // Refresh the employee list
+                await renderEmployeeList();
+            });
+
+            // Subscribe to user's own schedule updates
+            authManager.getUser().then(({ user }) => {
+                if (user) {
+                    realtimeManager.subscribeToUserSchedules(user.id, (payload) => {
+                        console.log('User schedule updated:', payload);
+                        // Refresh current schedule if it affects current week
+                        loadWeeklyScheduleFromBackend();
+                    });
+                }
+            });
+        }
+
+        // Enhanced save functionality with backend integration
+        async function saveSchedule() {
+            if (selectedDays.length === 0) {
+                showToast('Please select at least one day to work from home.', 'error', 3000);
+                return;
+            }
+
+            const saveButton = document.getElementById('saveButton');
+            const saveSpinner = document.getElementById('saveSpinner');
+            const saveButtonText = document.getElementById('saveButtonText');
             
-            // Load saved data
-            loadFromLocalStorage();
+            // Show loading state
+            saveButton.disabled = true;
+            saveSpinner.classList.remove('hidden');
+            saveButtonText.textContent = 'Saving...';
             
-            // Render initial UI
-            updateWeekDisplay();
-            renderEmployeeList();
-            updateSelectionCounter();
-            updateSaveButtonState();
-            
-            // Setup interactions
-            setupEventListeners();
-            setupKeyboardNavigation();
-            
-            // Show welcome message
-            setTimeout(() => {
-                showToast('Welcome! Select your work from home days for the week.', 'success', 3000);
-            }, 500);
+            try {
+                await saveToBackend();
+                
+                const dayNames = selectedDays.map(day => day.charAt(0).toUpperCase() + day.slice(1));
+                showToast(`Schedule saved! WFH days: ${dayNames.join(', ')}`, 'success', 4000);
+                
+                // Refresh office attendance
+                await renderEmployeeList();
+                
+            } catch (error) {
+                console.error('Save error:', error);
+                showToast('Failed to save schedule. Please try again.', 'error', 4000);
+            } finally {
+                // Hide loading state
+                saveSpinner.classList.add('hidden');
+                updateSaveButtonState();
+            }
         }
 
         // Run when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
+    
+    <!-- Include Supabase backend managers -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/schedule.js"></script>
+    <script src="js/realtime.js"></script>
 </body>
 </html> 

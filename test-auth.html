@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.1/dist/umd/supabase.js"></script>
+</head>
+<body>
+    <h1>Authentication Test</h1>
+    <div id="status">Loading...</div>
+    <div id="user-info"></div>
+    <div id="profile-info"></div>
+    <button onclick="testAuth()">Test Authentication</button>
+    <button onclick="testProfile()">Test Profile Fetch</button>
+
+    <script>
+        // Include configuration
+        const SUPABASE_CONFIG = {
+            url: 'https://ogbmvvqhgnnkuweapkpu.supabase.co',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nYm12dnFoZ25ua3V3ZWFwa3B1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkyMDI1NjIsImV4cCI6MjA2NDc3ODU2Mn0.QdZ-HsiDqtC73QtYoIRqtB4soOv5FgC5i3U3HskoE1g',
+            options: {
+                auth: {
+                    autoRefreshToken: true,
+                    persistSession: true,
+                    detectSessionInUrl: true
+                },
+                global: {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            }
+        };
+
+        const supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey, SUPABASE_CONFIG.options);
+
+        async function testAuth() {
+            try {
+                console.log('Testing authentication...');
+                const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+                
+                if (sessionError) {
+                    document.getElementById('status').innerHTML = `Session Error: ${sessionError.message}`;
+                    return;
+                }
+                
+                if (!session) {
+                    document.getElementById('status').innerHTML = 'No active session - need to login';
+                    return;
+                }
+                
+                console.log('Session found:', session);
+                document.getElementById('status').innerHTML = `Session active - expires: ${new Date(session.expires_at * 1000)}`;
+                
+                const { data: { user }, error: userError } = await supabase.auth.getUser();
+                if (userError) {
+                    document.getElementById('user-info').innerHTML = `User Error: ${userError.message}`;
+                    return;
+                }
+                
+                document.getElementById('user-info').innerHTML = `User: ${user.email} (ID: ${user.id})`;
+                
+            } catch (error) {
+                console.error('Auth test error:', error);
+                document.getElementById('status').innerHTML = `Error: ${error.message}`;
+            }
+        }
+
+        async function testProfile() {
+            try {
+                console.log('Testing profile fetch...');
+                const { data: { user }, error: userError } = await supabase.auth.getUser();
+                
+                if (userError || !user) {
+                    document.getElementById('profile-info').innerHTML = `No user found: ${userError?.message}`;
+                    return;
+                }
+                
+                console.log('Fetching profile for user:', user.id);
+                const { data: profile, error } = await supabase
+                    .from('user_profiles')
+                    .select('*')
+                    .eq('id', user.id)
+                    .maybeSingle();
+
+                if (error) {
+                    console.error('Profile fetch error:', error);
+                    document.getElementById('profile-info').innerHTML = `Profile Error: ${JSON.stringify(error)}`;
+                } else {
+                    console.log('Profile:', profile);
+                    document.getElementById('profile-info').innerHTML = `Profile: ${JSON.stringify(profile, null, 2)}`;
+                }
+                
+            } catch (error) {
+                console.error('Profile test error:', error);
+                document.getElementById('profile-info').innerHTML = `Error: ${error.message}`;
+            }
+        }
+
+        // Auto-run tests on load
+        window.addEventListener('load', async () => {
+            await testAuth();
+            await testProfile();
+        });
+    </script>
+</body>
+</html> 

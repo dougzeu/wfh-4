@@ -1,0 +1,237 @@
+---
+description: Backend supabase, tables, RLS, database, authentication
+globs: 
+alwaysApply: false
+---
+# Supabase Backend Development Rules
+
+This rule provides guidance for developing the FIWFHT application backend using Supabase, based on the comprehensive implementation plan in [docs/backend.md](mdc:docs/backend.md).
+
+## Project Configuration
+
+**Supabase Project Details:**
+- Project ID: `ogbmvvqhgnnkuweapkpu`
+- Project URL: `https://ogbmvvqhgnnkuweapkpu.supabase.co`
+- Region: `eu-north-1`
+- PostgreSQL Version: `17.4.1`
+
+## Database Schema Patterns
+
+### Table Naming & Structure
+- Use `public` schema for application tables
+- Follow snake_case naming convention
+- Always include `id UUID PRIMARY KEY DEFAULT gen_random_uuid()`
+- Include `created_at TIMESTAMPTZ DEFAULT NOW()` and `updated_at TIMESTAMPTZ DEFAULT NOW()`
+- Reference auth.users via `user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE`
+
+### Core Tables Structure
+1. **user_profiles** - Extended user information
+2. **wfh_schedules** - Daily WFH tracking with unique constraint on (user_id, date)
+3. **weekly_schedules** - Weekly WFH management with validation
+4. **office_capacity** - Office capacity and holiday management
+5. **company_holidays** - Company-wide holidays
+6. **schedule_audit** - Audit trail for all changes
+
+## Row Level Security (RLS) Requirements
+
+### RLS Policy Patterns
+- **ALWAYS** enable RLS on every table: `ALTER TABLE table_name ENABLE ROW LEVEL SECURITY`
+- Use granular policies: separate for SELECT, INSERT, UPDATE, DELETE
+- Create separate policies for `anon` and `authenticated` roles
+- Users can read all profiles but only manage their own data
+- Use `auth.uid() = user_id` for user-specific data access
+
+### Standard RLS Policy Template
+```sql
+-- Enable RLS
+ALTER TABLE public.table_name ENABLE ROW LEVEL SECURITY;
+
+-- Read access for all authenticated users
+CREATE POLICY "Users can read all records" ON public.table_name
+    FOR SELECT USING (true);
+
+-- Users can only manage their own records
+CREATE POLICY "Users can manage own records" ON public.table_name
+    FOR ALL USING (auth.uid() = user_id);
+```
+
+## Database Functions & Triggers
+
+### Required Functions
+1. **update_updated_at_column()** - Auto-update timestamps
+2. **validate_weekly_wfh_limit()** - Enforce WFH day limits
+3. **get_office_attendance()** - Calculate daily office attendance
+
+### Function Guidelines
+- Use `SECURITY INVOKER` by default
+- Set `search_path = ''` for security
+- Use fully qualified names (e.g., `public.table_name`)
+- Include comprehensive error handling
+- Add detailed comments explaining purpose
+
+### Trigger Pattern
+```sql
+CREATE TRIGGER update_table_updated_at 
+    BEFORE UPDATE ON public.table_name
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+```
+
+## Authentication Implementation
+
+### Google OAuth Configuration
+- Restrict to company domain: `hd: 'enhancefitness.com'`
+- Redirect to: `${window.location.origin}/home.html`
+- Enable `allowSignUps: true` only for company domain
+
+### Auth Class Pattern
+```javascript
+class AuthManager {
+    constructor(supabaseClient) {
+        this.supabase = supabaseClient;
+    }
+    
+    async signInWithGoogle() {
+        return await this.supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                hd: 'enhancefitness.com',
+                redirectTo: `${window.location.origin}/home.html`
+            }
+        });
+    }
+}
+```
+
+## API Integration Patterns
+
+### Client Manager Classes
+Create dedicated manager classes for:
+- **AuthManager** - Authentication operations
+- **ScheduleManager** - Schedule CRUD operations
+- **RealtimeManager** - Real-time subscriptions
+
+### Error Handling Pattern
+Always destructure and handle both `data` and `error`:
+```javascript
+const { data, error } = await supabase.operation();
+if (error) {
+    console.error('Operation failed:', error);
+    return { error };
+}
+return { data };
+```
+
+### Query Patterns
+- Use `.select('*')` sparingly, specify needed columns
+- Always include user filtering: `.eq('user_id', userId)`
+- Use `.single()` for expected single results
+- Use `.upsert()` for create-or-update operations
+
+## Real-time Subscriptions
+
+### Subscription Pattern
+```javascript
+const subscription = supabase
+    .channel('channel-name')
+    .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'table_name'
+    }, callback)
+    .subscribe();
+```
+
+### Subscription Management
+- Store subscriptions in arrays for cleanup
+- Always unsubscribe on component unmount
+- Use specific event types when possible ('INSERT', 'UPDATE', 'DELETE')
+
+## Edge Functions Development
+
+### Function Structure
+- Use Deno with proper imports
+- Include comprehensive error handling
+- Return proper JSON responses with appropriate status codes
+- Use service role key for admin operations
+
+### Required Edge Functions
+1. **weekly-reminder** - Send WFH schedule reminders
+2. **analytics** - Generate usage analytics
+
+## Migration Best Practices
+
+### Migration File Structure
+- Include descriptive header comments
+- Explain purpose and affected tables
+- Use lowercase SQL
+- Add copious comments for destructive operations
+- Enable RLS on all new tables
+- Create granular RLS policies
+
+### Migration Naming
+Use format: `001_descriptive_name.sql`
+
+## Security Requirements
+
+### Data Validation
+- Implement both client-side and server-side validation
+- Use Postgres constraints and triggers
+- Validate email domains (@enhancefitness.com)
+- Enforce business rules (max 2 WFH days per week)
+
+### Performance Optimization
+- Create indexes on frequently queried columns
+- Use specific column selection in queries
+- Implement client-side caching for static data
+- Optimize real-time subscription payloads
+
+### Required Indexes
+```sql
+CREATE INDEX idx_wfh_schedules_user_date ON public.wfh_schedules(user_id, date);
+CREATE INDEX idx_wfh_schedules_date ON public.wfh_schedules(date);
+CREATE INDEX idx_weekly_schedules_user_week ON public.weekly_schedules(user_id, week_start);
+```
+
+## Environment Configuration
+
+### Frontend Config Pattern
+```javascript
+const SUPABASE_CONFIG = {
+    url: 'https://ogbmvvqhgnnkuweapkpu.supabase.co',
+    anonKey: 'your-anon-key',
+    options: {
+        auth: {
+            autoRefreshToken: true,
+            persistSession: true,
+            detectSessionInUrl: true
+        }
+    }
+}
+```
+
+## Development Workflow
+
+### Implementation Phases
+1. **Database Setup** - Apply migrations, set RLS policies
+2. **Authentication** - Configure OAuth, test auth flows
+3. **Schedule Management** - Implement CRUD, add real-time
+4. **Advanced Features** - Deploy Edge Functions, add analytics
+5. **Testing & Optimization** - Performance testing, security audit
+
+### Testing Requirements
+- Test all RLS policies thoroughly
+- Verify auth flows with restricted domain
+- Test real-time subscriptions
+- Validate business rule enforcement (WFH limits)
+- Test Edge Function deployments
+
+## Code Organization
+
+### File Structure
+- Keep auth logic in dedicated `AuthManager` class
+- Separate schedule operations in `ScheduleManager` class
+- Isolate real-time functionality in `RealtimeManager` class
+- Store configuration in dedicated config files
+- Maintain separate migration files with clear naming
+
+This rule ensures consistent development patterns aligned with the comprehensive backend implementation plan detailed in the referenced documentation.
