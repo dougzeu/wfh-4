@@ -22,6 +22,27 @@
             transition: transform 0.3s ease-in-out;
             min-width: 300px;
             max-width: 90vw;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 640px) {
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                min-width: auto;
+                max-width: none;
+                transform: translateY(-100%);
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+            .toast.show {
+                transform: translateY(0);
+            }
         }
         .toast.show {
             transform: translateX(0);
@@ -70,24 +91,84 @@
         }
 
         /* Improved mobile responsive styles */
-        @media (max-width: 640px) {
+        .day-selector-grid {
+            display: grid;
+            gap: 0.75rem;
+            grid-template-columns: repeat(5, 1fr);
+            width: 100%;
+        }
+        
+        @media (max-width: 480px) {
             .day-selector-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.5rem !important;
+                padding: 0 1rem;
             }
             
             .day-selector-grid .day-selector:nth-child(5) {
-                grid-column: 1 / -1;
-                max-width: 50%;
-                margin: 0 auto;
+                grid-column: 1 / -1 !important;
+                max-width: 60% !important;
+                margin: 0 auto !important;
+                justify-self: center !important;
+            }
+            
+            .day-selector {
+                min-height: 64px !important;
+                min-width: auto !important;
+                width: 100% !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 640px) {
+            .day-selector-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0.5rem !important;
+                padding: 0 1rem;
+            }
+            
+            .day-selector-grid .day-selector:nth-child(4),
+            .day-selector-grid .day-selector:nth-child(5) {
+                grid-column: span 1 !important;
+                justify-self: center !important;
+            }
+            
+            .day-selector-grid .day-selector:nth-child(5) {
+                grid-column: 2 / 3 !important;
+            }
+            
+            .day-selector {
+                min-height: 72px !important;
+                min-width: auto !important;
+                width: 100% !important;
             }
         }
         
         @media (min-width: 641px) {
             .day-selector-grid {
-                display: flex;
-                gap: 0.75rem;
-                justify-content: center;
+                display: flex !important;
+                gap: 0.75rem !important;
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+            }
+            
+            .day-selector {
+                min-width: 100px !important;
+                width: auto !important;
+                flex: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .day-selector {
+                min-width: 108px !important;
+            }
+        }
+        
+        /* Improved week navigation for mobile */
+        @media (max-width: 640px) {
+            .week-nav-button {
+                min-width: 44px;
+                min-height: 44px;
             }
         }
     </style>
@@ -183,7 +264,7 @@
                             </div>
                             
                             <!-- Divider -->
-                            <div class="absolute bottom-0 h-0 left-[-48px] sm:left-[-96px] right-[-48px] sm:right-[-96px]">
+                            <div class="absolute bottom-0 h-0 left-[-16px] sm:left-[-48px] lg:left-[-96px] right-[-16px] sm:right-[-48px] lg:right-[-96px]">
                                 <div class="absolute bottom-[-0.75px] left-0 right-0 top-[-0.75px]">
                                     <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1536 2" aria-hidden="true">
                                         <path d="M0 1H1536" stroke="#D6DDE6" stroke-opacity="0.2" stroke-width="1.5"/>
@@ -261,16 +342,16 @@
                                             ">
                                                 <h1 id="wfh-heading" class="
                                                     font-bold relative shrink-0 
-                                                    text-xl sm:text-2xl lg:text-[28px] 
+                                                    text-lg sm:text-xl md:text-2xl lg:text-[28px] 
                                                     tracking-[-0.28px] max-w-full px-4
                                                 ">
                                                     <span class="block leading-[32px]">Choose up to 2 days per week to work from home.</span>
                                                 </h1>
                                                 <p class="
                                                     font-normal relative shrink-0 
-                                                    text-xs sm:text-sm text-nowrap
+                                                    text-xs sm:text-sm px-4 text-center
                                                 ">
-                                                    <span class="block leading-[20px] whitespace-pre">The next week will be set automatically, but you can adjust your days anytime.</span>
+                                                    <span class="block leading-[20px]">The next week will be set automatically, but you can adjust your days anytime.</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -836,7 +917,7 @@
                 
                 const button = document.createElement('button');
                 button.className = `
-                    relative rounded-lg shrink-0 w-full min-w-[100px] sm:w-[108px]
+                    relative rounded-lg shrink-0
                     min-h-[80px] sm:min-h-[88px]
                     border-[1.5px] transition-colors day-selector
                     focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black

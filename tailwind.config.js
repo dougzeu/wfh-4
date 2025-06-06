@@ -17,6 +17,13 @@ module.exports = {
       },
       fontFamily: {
         'jakarta': ['Plus Jakarta Sans', 'sans-serif']
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem'
+      },
+      screens: {
+        'xs': '475px',
       }
     },
   },

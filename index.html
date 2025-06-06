@@ -25,6 +25,25 @@
             font-weight: 500;
             font-size: 14px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            max-width: calc(100vw - 40px);
+            min-width: 250px;
+        }
+        
+        @media (max-width: 640px) {
+            .toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+                right: 16px;
+                min-width: auto;
+                max-width: none;
+                transform: translateY(-100%);
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+            .toast.show {
+                transform: translateY(0);
+            }
         }
         .toast.show {
             transform: translateX(0);
@@ -101,7 +120,7 @@
                                 </div>
                             </div>
                             <!-- Divider -->
-                            <div class="absolute bottom-0 h-0 left-[-48px] sm:left-[-96px] right-[-48px] sm:right-[-96px]">
+                            <div class="absolute bottom-0 h-0 left-[-16px] sm:left-[-48px] lg:left-[-96px] right-[-16px] sm:right-[-48px] lg:right-[-96px]">
                                 <div class="absolute bottom-[-0.75px] left-0 right-0 top-[-0.75px]">
                                     <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1536 2" aria-hidden="true">
                                         <path d="M0 1H1536" stroke="#D6DDE6" stroke-opacity="0.2" stroke-width="1.5"/>
@@ -138,11 +157,11 @@
                                             flex flex-col items-center 
                                             min-h-inherit relative size-full
                                         ">
-                                            <div class="
-                                                flex flex-col gap-8 sm:gap-12 items-center justify-start 
-                                                min-h-inherit pb-0 pt-16 sm:pt-[200px] px-4 
-                                                relative w-full max-w-md
-                                            ">
+                                                                        <div class="
+                                flex flex-col gap-8 sm:gap-12 items-center justify-start 
+                                min-h-inherit pb-0 pt-12 sm:pt-20 md:pt-32 lg:pt-[200px] px-4 
+                                relative w-full max-w-md
+                            ">
                                                 
                                                 <!-- Form Container -->
                                                 <div class="relative shrink-0 w-full">
@@ -170,7 +189,7 @@
                                                         <!-- Form Section -->
                                                         <form class="relative shrink-0 w-full" novalidate aria-label="Login form">
                                                             <div class="
-                                                                flex flex-col gap-4 items-start justify-start 
+                                                                flex flex-col gap-4 sm:gap-5 items-start justify-start 
                                                                 p-0 relative w-full
                                                             ">
                                                                 <!-- Google Login Button -->

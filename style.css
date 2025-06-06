@@ -562,6 +562,16 @@ video {
   width: 100%;
 }
 
+@media (min-width: 475px) {
+  .\!container {
+    max-width: 475px !important;
+  }
+
+  .container {
+    max-width: 475px;
+  }
+}
+
 @media (min-width: 640px) {
   .\!container {
     max-width: 640px !important;
@@ -652,12 +662,20 @@ video {
   left: 0px;
 }
 
+.left-\[-16px\] {
+  left: -16px;
+}
+
 .left-\[-48px\] {
   left: -48px;
 }
 
 .right-0 {
   right: 0px;
+}
+
+.right-\[-16px\] {
+  right: -16px;
 }
 
 .right-\[-48px\] {
@@ -724,6 +742,10 @@ video {
 
 .table {
   display: table;
+}
+
+.grid {
+  display: grid;
 }
 
 .hidden {
@@ -809,10 +831,6 @@ video {
 
 .min-w-0 {
   min-width: 0px;
-}
-
-.min-w-\[100px\] {
-  min-width: 100px;
 }
 
 .min-w-\[200px\] {
@@ -1146,8 +1164,8 @@ video {
   padding-bottom: 0px;
 }
 
-.pt-16 {
-  padding-top: 4rem;
+.pt-12 {
+  padding-top: 3rem;
 }
 
 .text-left {
@@ -1448,8 +1466,16 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:left-\[-48px\] {
+    left: -48px;
+  }
+
   .sm\:left-\[-96px\] {
     left: -96px;
+  }
+
+  .sm\:right-\[-48px\] {
+    right: -48px;
   }
 
   .sm\:right-\[-96px\] {
@@ -1462,10 +1488,6 @@ video {
 
   .sm\:min-h-\[88px\] {
     min-height: 88px;
-  }
-
-  .sm\:w-\[108px\] {
-    width: 108px;
   }
 
   .sm\:w-auto {
@@ -1482,6 +1504,10 @@ video {
 
   .sm\:gap-3 {
     gap: 0.75rem;
+  }
+
+  .sm\:gap-5 {
+    gap: 1.25rem;
   }
 
   .sm\:gap-8 {
@@ -1508,8 +1534,8 @@ video {
     padding-bottom: 0.5rem;
   }
 
-  .sm\:pt-\[200px\] {
-    padding-top: 200px;
+  .sm\:pt-20 {
+    padding-top: 5rem;
   }
 
   .sm\:text-2xl {
@@ -1544,12 +1570,33 @@ video {
   .md\:hidden {
     display: none;
   }
+
+  .md\:pt-32 {
+    padding-top: 8rem;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 @media (min-width: 1024px) {
+  .lg\:left-\[-96px\] {
+    left: -96px;
+  }
+
+  .lg\:right-\[-96px\] {
+    right: -96px;
+  }
+
   .lg\:px-12 {
     padding-left: 3rem;
     padding-right: 3rem;
+  }
+
+  .lg\:pt-\[200px\] {
+    padding-top: 200px;
   }
 
   .lg\:text-\[15px\] {
