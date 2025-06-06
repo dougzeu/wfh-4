@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIWFHT - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'accent': '#a7ee43',
+                        'accent-green': '#A7EE43',
+                        'black': '#080F17',
+                        'white': '#D6DDE6',
+                        'transparent-3': '#D6DDE6',
+                        'transparent-2': '#FFFFFF',
+                        'google-1': '#4285F4',
+                        'google-2': '#34A853',
+                        'google-3': '#FBBC05',
+                        'google-4': '#EB4335'
+                    },
+                    fontFamily: {
+                        'jakarta': ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black min-h-screen font-jakarta">
+    <div class="relative size-full min-h-screen">
+        <div class="min-h-inherit relative size-full">
+            <div class="box-border content-stretch flex flex-col-reverse items-start justify-start min-h-inherit px-12 py-0 relative size-full">
+                
+                <!-- Header -->
+                <div class="bg-black order-3 relative shrink-0 w-full">
+                    <div class="flex flex-row items-center relative size-full">
+                        <div class="box-border content-stretch flex flex-row items-center justify-between px-0 py-4 relative w-full">
+                            <div class="h-8 relative shrink-0">
+                                <div class="box-border content-stretch flex flex-row gap-1.5 h-8 items-center justify-start p-0 relative">
+                                    <!-- Logo Icon -->
+                                    <div class="relative shrink-0 size-8">
+                                        <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
+                                            <path d="M10.6667 18.6667C10.6667 18.6667 12.6667 21.3333 16 21.3333C19.3333 21.3333 21.3333 18.6667 21.3333 18.6667M22.6667 12.32C22.14 12.9667 21.42 13.3333 20.6667 13.3333C19.9133 13.3333 19.2133 12.9667 18.6667 12.32M13.3333 12.32C12.8067 12.9667 12.0867 13.3333 11.3333 13.3333C10.58 13.3333 9.88 12.9667 9.33333 12.32M29.3333 16C29.3333 23.3638 23.3638 29.3333 16 29.3333C8.6362 29.3333 2.66667 23.3638 2.66667 16C2.66667 8.6362 8.6362 2.66667 16 2.66667C23.3638 2.66667 29.3333 8.6362 29.3333 16Z" stroke="#A7EE43" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                        </svg>
+                                    </div>
+                                    <!-- Logo Text -->
+                                    <div class="font-bold leading-[0] relative shrink-0 text-accent text-[24px] text-left text-nowrap tracking-[-0.72px]">
+                                        <p class="block leading-none whitespace-pre">FIWFHT</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Divider -->
+                            <div class="absolute bottom-0 h-0 left-[-96px] right-[-96px]">
+                                <div class="absolute bottom-[-0.75px] left-0 right-0 top-[-0.75px]">
+                                    <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1536 2">
+                                        <path d="M0 1H1536" stroke="#D6DDE6" stroke-opacity="0.2" stroke-width="1.5"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="order-2 relative shrink-0 w-full">
+                    <div class="relative size-full">
+                        <div class="box-border content-stretch flex flex-row-reverse items-start justify-start px-0 py-12 relative w-full">
+                            <div class="basis-0 grow min-h-px min-w-px order-1 relative shrink-0">
+                                <div class="box-border content-stretch flex flex-col-reverse items-start justify-start p-0 relative w-full">
+                                    
+                                    <!-- Form -->
+                                    <div class="bg-black min-h-[700px] order-1 relative shrink-0 w-full">
+                                        <div class="flex flex-col items-center min-h-inherit relative size-full">
+                                            <div class="box-border content-stretch flex flex-col gap-12 items-center justify-start min-h-inherit pb-0 pt-[200px] px-0 relative w-full">
+                                                
+                                                <!-- Form Container -->
+                                                <div class="relative shrink-0 w-[400px]">
+                                                    <div class="box-border content-stretch flex flex-col gap-8 items-center justify-start p-0 relative w-[400px]">
+                                                        
+                                                        <!-- Form Header -->
+                                                        <div class="relative shrink-0 w-full">
+                                                            <div class="box-border content-stretch flex flex-col gap-2 items-start justify-start leading-[0] p-0 relative text-white text-center w-full">
+                                                                <div class="font-bold relative shrink-0 text-[28px] tracking-[-0.28px] w-full">
+                                                                    <p class="block leading-[32px]">Friends, I'll Work From Home Tomorrow</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Form Section -->
+                                                        <div class="relative shrink-0 w-full">
+                                                            <div class="box-border content-stretch flex flex-col gap-4 items-start justify-start p-0 relative w-full">
+                                                                
+                                                                <!-- Email Input -->
+                                                                <div class="relative rounded-lg shrink-0 w-full bg-[rgba(255,255,255,0.04)] border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                                    <div class="flex flex-row items-center relative size-full">
+                                                                        <div class="box-border content-stretch flex flex-row gap-2 items-center justify-start px-3 py-2 relative w-full">
+                                                                            <input type="email" placeholder="Enter your @enhancefitness email" 
+                                                                                   class="basis-0 font-medium grow min-h-px min-w-px bg-transparent text-[15px] text-[rgba(214,221,230,0.4)] text-left outline-none placeholder-[rgba(214,221,230,0.4)] leading-[20px]">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Login Button -->
+                                                                <button class="bg-accent relative rounded-lg shrink-0 w-full hover:bg-accent/90 transition-colors">
+                                                                    <div class="flex flex-row items-center justify-center relative size-full">
+                                                                        <div class="box-border content-stretch flex flex-row items-center justify-center px-4 py-2 relative w-full">
+                                                                            <div class="font-semibold leading-[0] relative shrink-0 text-black text-[15px] text-left text-nowrap">
+                                                                                <p class="block leading-[20px] whitespace-pre">Login</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="bg-black h-12 order-1 shrink-0 w-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.querySelector('button[class*="bg-accent"]').addEventListener('click', function() {
+            const email = document.querySelector('input[type="email"]').value;
+            if (email) {
+                // Simulate login success and redirect to home page
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+                
+                // Show loading state
+                this.querySelector('p').textContent = 'Logging in...';
+                this.disabled = true;
+            } else {
+                alert('Please enter your email first');
+            }
+        });
+
+        document.querySelector('button[class*="bg-black border"]').addEventListener('click', function() {
+            // Simulate Google OAuth and redirect to home page
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1000);
+            
+            // Show loading state
+            this.querySelector('p').textContent = 'Connecting...';
+            this.disabled = true;
+        });
+
+        // Checkbox functionality
+        const checkbox = document.getElementById('remember');
+        const checkboxSvg = checkbox.nextElementSibling.querySelector('svg path');
+        
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                checkboxSvg.setAttribute('fill', '#A7EE43');
+            } else {
+                checkboxSvg.setAttribute('fill', 'none');
+            }
+        });
+    </script>
+</body>
+</html> 

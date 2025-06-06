@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIWFHT - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'accent': '#a7ee43',
+                        'accent-green': '#A7EE43',
+                        'black': '#080F17',
+                        'white': '#D6DDE6',
+                        'transparent-3': '#D6DDE6'
+                    },
+                    fontFamily: {
+                        'jakarta': ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black min-h-screen font-jakarta">
+    <div class="relative size-full min-h-screen">
+        <div class="min-h-inherit relative size-full">
+            <div class="box-border content-stretch flex flex-col-reverse items-start justify-start min-h-inherit px-12 py-0 relative size-full">
+                
+                <!-- Header -->
+                <div class="bg-black order-3 relative shrink-0 w-full">
+                    <div class="flex flex-row items-center relative size-full">
+                        <div class="box-border content-stretch flex flex-row items-center justify-between px-0 py-3 relative w-full">
+                            <!-- Logo -->
+                            <div class="h-8 relative shrink-0">
+                                <div class="box-border content-stretch flex flex-row gap-1.5 h-8 items-center justify-start p-0 relative">
+                                    <div class="relative shrink-0 size-8">
+                                        <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
+                                            <path d="M10.6667 18.6667C10.6667 18.6667 12.6667 21.3333 16 21.3333C19.3333 21.3333 21.3333 18.6667 21.3333 18.6667M22.6667 12.32C22.14 12.9667 21.42 13.3333 20.6667 13.3333C19.9133 13.3333 19.2133 12.9667 18.6667 12.32M13.3333 12.32C12.8067 12.9667 12.0867 13.3333 11.3333 13.3333C10.58 13.3333 9.88 12.9667 9.33333 12.32M29.3333 16C29.3333 23.3638 23.3638 29.3333 16 29.3333C8.6362 29.3333 2.66667 23.3638 2.66667 16C2.66667 8.6362 8.6362 2.66667 16 2.66667C23.3638 2.66667 29.3333 8.6362 29.3333 16Z" stroke="#A7EE43" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                        </svg>
+                                    </div>
+                                    <div class="font-bold leading-[0] relative shrink-0 text-accent text-[24px] text-left text-nowrap tracking-[-0.72px]">
+                                        <p class="block leading-none whitespace-pre">FIWFHT</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- User Info -->
+                            <div class="relative shrink-0 w-[446.333px]">
+                                <div class="box-border content-stretch flex flex-row gap-2 items-center justify-end p-0 relative w-[446.333px]">
+                                    <div class="font-medium leading-[0] relative shrink-0 text-white text-[15px] text-left text-nowrap" id="user-name">
+                                        <p class="block leading-[20px] whitespace-pre">{{ userName }}</p>
+                                    </div>
+                                    <button class="relative size-6 shrink-0 flex items-center justify-center hover:bg-white/10 rounded transition-colors" title="Logout" aria-label="Logout">
+                                        <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#D6DDE6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Divider -->
+                            <div class="absolute bottom-0 h-0 left-[-96px] right-[-96px]">
+                                <div class="absolute bottom-[-0.75px] left-0 right-0 top-[-0.75px]">
+                                    <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1536 2">
+                                        <path d="M0 1H1536" stroke="#D6DDE6" stroke-opacity="0.2" stroke-width="1.5"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="order-2 relative shrink-0 w-full">
+                    <div class="relative size-full">
+                        <div class="box-border content-stretch flex flex-col-reverse items-start justify-start px-0 py-12 relative w-full">
+                            
+                            <!-- Work From Home Section -->
+                            <div class="bg-black relative shrink-0 w-full order-2">
+                                <div class="flex flex-col items-center relative size-full">
+                                    <div class="box-border content-stretch flex flex-col gap-8 items-center justify-start px-0 py-16 relative w-full">
+                                        
+                                        <!-- Date Navigation -->
+                                        <div class="relative shrink-0">
+                                            <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start p-0 relative">
+                                                <button class="flex items-center justify-center relative shrink-0 hover:bg-[rgba(255,255,255,0.1)] p-1 rounded transition-colors" id="prevWeek">
+                                                    <div class="flex-none rotate-[180deg] scale-y-[-100%]">
+                                                        <svg class="relative size-6" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#D6DDE6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="relative shrink-0 size-6">
+                                                    <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                        <path d="M16 2V6M8 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="#D6DDE6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="font-medium leading-[0] relative shrink-0 text-white text-[15px] text-left text-nowrap">
+                                                    <p class="block leading-[20px] whitespace-pre" id="weekRange">May 25 - 30, 2025</p>
+                                                </div>
+                                                <button class="relative size-6 shrink-0 hover:bg-[rgba(255,255,255,0.1)] p-1 rounded transition-colors" id="nextWeek">
+                                                    <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                                                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#D6DDE6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section Title -->
+                                        <div class="relative shrink-0 w-full">
+                                            <div class="box-border content-stretch flex flex-col gap-2 items-center justify-start leading-[0] p-0 relative text-white text-center w-full">
+                                                <div class="font-bold relative shrink-0 text-[28px] tracking-[-0.28px] max-w-full">
+                                                    <p class="block leading-[32px]">Choose up to 2 days per week to work from home.</p>
+                                                </div>
+                                                <div class="font-normal relative shrink-0 text-[12px] text-nowrap">
+                                                    <p class="block leading-[20px] whitespace-pre">The next week will be set automatically, but you can adjust your days anytime.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <!-- Days Selection -->
+                                        <div class="relative shrink-0">
+                                            <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start p-0 relative">
+                                                <!-- Monday -->
+                                                <button class="bg-black relative rounded-lg shrink-0 w-[108px] border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid hover:bg-[rgba(255,255,255,0.04)] transition-colors day-selector" data-day="monday" data-date="25">
+                                                    <div class="flex flex-col items-center justify-center relative size-full">
+                                                        <div class="box-border content-stretch flex flex-col gap-3 items-center justify-center leading-[0] px-3 py-4 relative text-left text-nowrap w-[108px] text-white">
+                                                            <div class="font-semibold relative shrink-0 text-[13px]">
+                                                                <p class="block leading-[16px] text-nowrap whitespace-pre">Monday</p>
+                                                            </div>
+                                                            <div class="font-medium relative shrink-0 text-[22px]">
+                                                                <p class="block leading-[20px] text-nowrap whitespace-pre">25</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+
+                                                <!-- Tuesday (Selected) -->
+                                                <button class="bg-accent relative rounded-lg shrink-0 w-[108px] day-selector selected" data-day="tuesday" data-date="26">
+                                                    <div class="flex flex-col items-center justify-center relative size-full">
+                                                        <div class="box-border content-stretch flex flex-col gap-3 items-center justify-center leading-[0] px-3 py-4 relative text-left text-nowrap w-[108px] text-black">
+                                                            <div class="font-semibold relative shrink-0 text-[13px]">
+                                                                <p class="block leading-[16px] text-nowrap whitespace-pre">Tuesday</p>
+                                                            </div>
+                                                            <div class="font-medium relative shrink-0 text-[22px]">
+                                                                <p class="block leading-[20px] text-nowrap whitespace-pre">26</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+
+                                                <!-- Wednesday -->
+                                                <button class="bg-black relative rounded-lg shrink-0 w-[108px] border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid hover:bg-[rgba(255,255,255,0.04)] transition-colors day-selector" data-day="wednesday" data-date="27">
+                                                    <div class="flex flex-col items-center justify-center relative size-full">
+                                                        <div class="box-border content-stretch flex flex-col gap-3 items-center justify-center leading-[0] px-3 py-4 relative text-left text-nowrap w-[108px] text-white">
+                                                            <div class="font-semibold relative shrink-0 text-[13px]">
+                                                                <p class="block leading-[16px] text-nowrap whitespace-pre">Wednesday</p>
+                                                            </div>
+                                                            <div class="font-medium relative shrink-0 text-[22px]">
+                                                                <p class="block leading-[20px] text-nowrap whitespace-pre">27</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+
+                                                <!-- Thursday -->
+                                                <button class="bg-black relative rounded-lg shrink-0 w-[108px] border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid hover:bg-[rgba(255,255,255,0.04)] transition-colors day-selector" data-day="thursday" data-date="28">
+                                                    <div class="flex flex-col items-center justify-center relative size-full">
+                                                        <div class="box-border content-stretch flex flex-col gap-3 items-center justify-center leading-[0] px-3 py-4 relative text-left text-nowrap w-[108px] text-white">
+                                                            <div class="font-semibold relative shrink-0 text-[13px]">
+                                                                <p class="block leading-[16px] text-nowrap whitespace-pre">Thursday</p>
+                                                            </div>
+                                                            <div class="font-medium relative shrink-0 text-[22px]">
+                                                                <p class="block leading-[20px] text-nowrap whitespace-pre">28</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+
+                                                <!-- Friday -->
+                                                <button class="bg-black relative rounded-lg shrink-0 w-[108px] border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid hover:bg-[rgba(255,255,255,0.04)] transition-colors day-selector" data-day="friday" data-date="29">
+                                                    <div class="flex flex-col items-center justify-center relative size-full">
+                                                        <div class="box-border content-stretch flex flex-col gap-3 items-center justify-center leading-[0] px-3 py-4 relative text-left text-nowrap w-[108px] text-white">
+                                                            <div class="font-semibold relative shrink-0 text-[13px]">
+                                                                <p class="block leading-[16px] text-nowrap whitespace-pre">Friday</p>
+                                                            </div>
+                                                            <div class="font-medium relative shrink-0 text-[22px]">
+                                                                <p class="block leading-[20px] text-nowrap whitespace-pre">29</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Save Button -->
+                                        <button class="bg-accent h-[52px] relative rounded-lg shrink-0 hover:bg-accent/90 transition-colors" id="saveButton">
+                                            <div class="flex flex-row items-center justify-center relative size-full">
+                                                <div class="box-border content-stretch flex flex-row h-[52px] items-center justify-center px-4 py-2 relative">
+                                                    <div class="font-semibold leading-[0] relative shrink-0 text-black text-[15px] text-left text-nowrap">
+                                                        <p class="block leading-[20px] whitespace-pre">Save</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </button>
+
+                                        <!-- Divider -->
+                                        <div class="absolute bottom-0 h-0 left-[-96px] right-[-96px]">
+                                            <div class="absolute bottom-[-0.75px] left-0 right-0 top-[-0.75px]">
+                                                <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1536 2">
+                                                    <path d="M0 1H1536" stroke="#D6DDE6" stroke-opacity="0.2" stroke-width="1.5"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Office Attendance Section -->
+                            <div class="bg-black relative shrink-0 w-full order-1">
+                                <div class="flex flex-col items-center relative size-full">
+                                    <div class="box-border content-stretch flex flex-col gap-6 items-center justify-start px-0 py-16 relative w-full">
+                                        
+                                        <!-- Section Title -->
+                                        <div class="relative shrink-0 w-full">
+                                            <div class="box-border content-stretch flex flex-col gap-2 items-center justify-start leading-[0] p-0 relative text-white text-center w-full">
+                                                <div class="font-bold relative shrink-0 text-[28px] tracking-[-0.28px] max-w-full">
+                                                    <p class="block leading-[32px]">Who is in the office today?</p>
+                                                </div>
+                                                <div class="font-normal relative shrink-0 text-[12px] text-nowrap">
+                                                    <p class="block leading-[20px] whitespace-pre">People working in the office</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Employee List -->
+                                        <div class="relative shrink-0">
+                                            <div class="box-border content-stretch flex flex-row gap-6 items-start justify-start p-0 relative">
+                                                <!-- Left Column -->
+                                                <div class="relative shrink-0">
+                                                    <div class="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative">
+                                                        <!-- Employee Cards -->
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Sophia Turner</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">sophia@healthboost.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Michael Chen</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">michael@fitlife.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Emma Roberts</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">emma@wellnessworld.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Liam Johnson</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">liam@activejourney.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Olivia Martinez</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">olivia@vitalityhub.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">James Smith</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">james@powerup.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Ava Brown</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">ava@dynamicfitness.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Right Column -->
+                                                <div class="relative shrink-0">
+                                                    <div class="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative">
+                                                        <!-- Employee Cards -->
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Elijah Davis</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">elijah@strengthzone.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Mia Wilson</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">mia@trainhard.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Noah Garcia</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">noah@wellbeing.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Isabella Lopez</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">isabella@moveforward.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Lucas Taylor</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">lucas@totalfit.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Charlotte Anderson</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">charlotte@energize.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="relative shrink-0 bg-black rounded-lg border-[1.5px] border-[rgba(214,221,230,0.2)] border-solid">
+                                                            <div class="flex flex-row items-center relative size-full">
+                                                                <div class="box-border content-stretch flex flex-row gap-3 items-center justify-start leading-[0] px-3 py-2 relative text-left text-nowrap">
+                                                                    <div class="font-medium relative shrink-0 text-white text-[15px]">
+                                                                        <p class="block leading-[20px] text-nowrap whitespace-pre">Benjamin Thomas</p>
+                                                                    </div>
+                                                                    <div class="font-semibold overflow-ellipsis overflow-hidden relative shrink-0 text-[13px] text-[rgba(214,221,230,0.4)]">
+                                                                        <p class="block leading-[16px] overflow-inherit text-nowrap whitespace-pre">benjamin@revitalize.com</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Divider -->
+                                        <div class="absolute bottom-0 h-0 left-[-96px] right-[-96px]">
+                                            <div class="absolute bottom-[-0.75px] left-0 right-0 top-[-0.75px]">
+                                                <svg class="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1536 2">
+                                                    <path d="M0 1H1536" stroke="#D6DDE6" stroke-opacity="0.2" stroke-width="1.5"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="bg-black h-12 order-1 shrink-0 w-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Date management
+        let currentWeekStart = new Date(2025, 4, 25); // May 25, 2025 (month is 0-indexed)
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+        function formatWeekRange(startDate) {
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 4); // Friday (5 days later)
+            
+            const startMonth = months[startDate.getMonth()];
+            const endMonth = months[endDate.getMonth()];
+            const startDay = startDate.getDate();
+            const endDay = endDate.getDate();
+            const year = startDate.getFullYear();
+            
+            if (startMonth === endMonth) {
+                return `${startMonth} ${startDay} - ${endDay}, ${year}`;
+            } else {
+                return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${year}`;
+            }
+        }
+
+        function updateWeekDisplay() {
+            const weekRange = formatWeekRange(currentWeekStart);
+            document.getElementById('weekRange').textContent = weekRange;
+            document.getElementById('weekRangeOffice').textContent = weekRange;
+            
+            // Update day buttons
+            const dayButtons = document.querySelectorAll('.day-selector');
+            dayButtons.forEach((button, index) => {
+                const dayDate = new Date(currentWeekStart);
+                dayDate.setDate(currentWeekStart.getDate() + index);
+                
+                const dateNumber = dayDate.getDate();
+                button.setAttribute('data-date', dateNumber);
+                button.querySelector('.text-[22px] p').textContent = dateNumber;
+            });
+        }
+
+        // Day selection functionality
+        let selectedDays = ['tuesday']; // Initially Tuesday is selected
+        const maxSelections = 2;
+
+        function resetDayStyles(button) {
+            button.classList.remove('bg-accent', 'selected');
+            button.classList.add('bg-black', 'border-[1.5px]', 'border-[rgba(214,221,230,0.2)]', 'border-solid');
+            const textContainer = button.querySelector('div > div');
+            textContainer.classList.remove('text-black');
+            textContainer.classList.add('text-white');
+        }
+
+        function setSelectedDayStyles(button) {
+            button.classList.remove('bg-black', 'border-[1.5px]', 'border-[rgba(214,221,230,0.2)]', 'border-solid');
+            button.classList.add('bg-accent', 'selected');
+            const textContainer = button.querySelector('div > div');
+            textContainer.classList.remove('text-white');
+            textContainer.classList.add('text-black');
+        }
+
+        function updateDaySelector(button, day) {
+            const isSelected = selectedDays.includes(day);
+            
+            if (isSelected) {
+                // Deselect
+                selectedDays = selectedDays.filter(d => d !== day);
+                resetDayStyles(button);
+            } else {
+                // Select (if under limit)
+                if (selectedDays.length < maxSelections) {
+                    selectedDays.push(day);
+                    setSelectedDayStyles(button);
+                } else {
+                    alert('You can only select up to 2 days per week to work from home.');
+                }
+            }
+        }
+
+        // Date navigation functionality
+        function changeWeek(direction) {
+            const newWeekStart = new Date(currentWeekStart);
+            newWeekStart.setDate(currentWeekStart.getDate() + (direction * 7));
+            currentWeekStart = newWeekStart;
+            
+            // Reset selections when changing weeks
+            selectedDays = [];
+            document.querySelectorAll('.day-selector').forEach(button => {
+                resetDayStyles(button);
+            });
+            
+            updateWeekDisplay();
+        }
+
+        // Add click listeners to day selectors
+        document.querySelectorAll('.day-selector').forEach(button => {
+            button.addEventListener('click', function() {
+                const day = this.getAttribute('data-day');
+                updateDaySelector(this, day);
+            });
+        });
+
+        // Add click listeners to date navigation buttons
+        document.getElementById('prevWeek').addEventListener('click', () => changeWeek(-1));
+        document.getElementById('nextWeek').addEventListener('click', () => changeWeek(1));
+        document.getElementById('prevWeekOffice').addEventListener('click', () => changeWeek(-1));
+        document.getElementById('nextWeekOffice').addEventListener('click', () => changeWeek(1));
+
+        // Save button functionality
+        document.getElementById('saveButton').addEventListener('click', function() {
+            if (selectedDays.length === 0) {
+                alert('Please select at least one day to work from home.');
+            } else {
+                const dayNames = selectedDays.map(day => day.charAt(0).toUpperCase() + day.slice(1));
+                alert(`Schedule saved! You will work from home on: ${dayNames.join(', ')}`);
+            }
+        });
+
+        // Initialize the display
+        updateWeekDisplay();
+    </script>
+</body>
+</html> 
