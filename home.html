@@ -343,6 +343,174 @@
                                 </div>
                             </section>
 
+                            <!-- Vacation/Leave Management Section -->
+                            <section class="bg-black relative shrink-0 w-full order-1.5" aria-labelledby="vacation-heading">
+                                <div class="flex flex-col items-center relative size-full">
+                                    <div class="
+                                        flex flex-col gap-6 sm:gap-8 items-center justify-start 
+                                        px-0 py-8 sm:py-16 
+                                        relative w-full max-w-6xl
+                                    ">
+                                        
+                                        <!-- Section Title -->
+                                        <div class="relative shrink-0 w-full">
+                                            <div class="
+                                                flex flex-col gap-2 items-center justify-start 
+                                                leading-[0] p-0 relative text-white text-center w-full
+                                            ">
+                                                <h2 id="vacation-heading" class="
+                                                    font-bold relative shrink-0 
+                                                    text-xl sm:text-2xl lg:text-[28px] 
+                                                    tracking-[-0.28px] max-w-full
+                                                ">
+                                                    <span class="block leading-[32px]">Vacation & Leave Management</span>
+                                                </h2>
+                                                <p class="
+                                                    font-normal relative shrink-0 
+                                                    text-xs sm:text-sm text-white/80
+                                                ">
+                                                    <span class="block leading-[20px]">Set your vacation dates and time off</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Current Vacation Status -->
+                                        <div class="relative shrink-0 w-full max-w-2xl">
+                                            <div class="bg-white/5 border border-white/10 rounded-lg p-6">
+                                                <div class="flex flex-col gap-4">
+                                                    <div class="flex items-center justify-between">
+                                                        <h3 class="text-white font-semibold text-lg">Current Leave Status</h3>
+                                                        <button id="setVacationBtn" class="
+                                                            bg-accent text-black font-medium px-4 py-2 rounded-lg
+                                                            hover:bg-accent/90 transition-colors
+                                                            focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black
+                                                        ">
+                                                            Set Leave
+                                                        </button>
+                                                    </div>
+                                                    
+                                                    <!-- Vacation Status Display -->
+                                                    <div id="vacationStatus" class="text-white/80">
+                                                        <div id="noVacationMessage" class="text-sm">
+                                                            No upcoming vacation scheduled
+                                                        </div>
+                                                        <div id="vacationDetails" class="hidden">
+                                                            <div class="flex flex-col gap-2">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-3 h-3 bg-orange-400 rounded-full"></div>
+                                                                    <span class="text-sm font-medium text-orange-400">On Vacation</span>
+                                                                </div>
+                                                                <div class="text-sm">
+                                                                    <span id="vacationDates"></span>
+                                                                </div>
+                                                                <div class="text-xs text-white/60">
+                                                                    <span id="vacationDaysCount"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Vacation Date Picker Modal -->
+                            <div id="vacationModal" class="
+                                fixed inset-0 z-50 hidden items-center justify-center 
+                                bg-black bg-opacity-50 backdrop-blur-sm
+                            " role="dialog" aria-labelledby="vacation-modal-title" aria-describedby="vacation-modal-description">
+                                <div class="bg-black border border-white/20 rounded-lg p-6 max-w-md mx-4 w-full max-w-lg">
+                                    <div class="flex flex-col gap-6">
+                                        <!-- Modal Header -->
+                                        <div class="flex items-center justify-between">
+                                            <h3 id="vacation-modal-title" class="text-white font-semibold text-xl">Set Vacation Dates</h3>
+                                            <button id="closeVacationModal" class="
+                                                text-white/60 hover:text-white transition-colors p-2
+                                                focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black
+                                            " aria-label="Close modal">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="m18 6-12 12M6 6l12 12"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        <!-- Date Inputs -->
+                                        <div class="flex flex-col gap-4">
+                                            <div class="flex flex-col gap-2">
+                                                <label for="vacationStartDate" class="text-white font-medium text-sm">Start Date</label>
+                                                <input 
+                                                    type="date" 
+                                                    id="vacationStartDate" 
+                                                    class="
+                                                        bg-white/10 border border-white/20 rounded-lg px-3 py-2
+                                                        text-white placeholder-white/60
+                                                        focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="flex flex-col gap-2">
+                                                <label for="vacationEndDate" class="text-white font-medium text-sm">End Date</label>
+                                                <input 
+                                                    type="date" 
+                                                    id="vacationEndDate" 
+                                                    class="
+                                                        bg-white/10 border border-white/20 rounded-lg px-3 py-2
+                                                        text-white placeholder-white/60
+                                                        focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
+                                                    "
+                                                />
+                                            </div>
+                                            <div class="flex flex-col gap-2">
+                                                <label for="vacationNotes" class="text-white font-medium text-sm">Notes (Optional)</label>
+                                                <textarea 
+                                                    id="vacationNotes" 
+                                                    rows="3"
+                                                    placeholder="Add any notes about your vacation..."
+                                                    class="
+                                                        bg-white/10 border border-white/20 rounded-lg px-3 py-2
+                                                        text-white placeholder-white/60 resize-none
+                                                        focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
+                                                    "
+                                                ></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Vacation Summary -->
+                                        <div id="vacationSummary" class="hidden bg-accent/10 border border-accent/20 rounded-lg p-4">
+                                            <div class="text-accent text-sm font-medium mb-2">Vacation Summary:</div>
+                                            <div id="vacationSummaryText" class="text-white/80 text-sm"></div>
+                                        </div>
+
+                                        <!-- Modal Actions -->
+                                        <div class="flex gap-3 justify-end">
+                                            <button id="clearVacationBtn" class="
+                                                px-4 py-2 text-red-400 hover:text-red-300 font-medium
+                                                transition-colors min-h-[44px] hidden
+                                                focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-black
+                                            ">Clear Vacation</button>
+                                            <button id="cancelVacationBtn" class="
+                                                px-4 py-2 text-white/80 hover:text-white font-medium
+                                                transition-colors min-h-[44px]
+                                                focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black
+                                            ">Cancel</button>
+                                            <button id="saveVacationBtn" class="
+                                                px-4 py-2 bg-accent text-black rounded font-semibold
+                                                hover:bg-accent/90 transition-colors min-h-[44px]
+                                                focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black
+                                                disabled:opacity-50 disabled:cursor-not-allowed
+                                            ">
+                                                <div class="flex items-center justify-center gap-2">
+                                                    <div id="vacationSaveSpinner" class="spinner hidden"></div>
+                                                    <span>Save Vacation</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Who's in the Office Section -->
                             <section class="bg-black relative shrink-0 w-full order-1" aria-labelledby="office-heading">
                                 <div class="flex flex-col items-center relative size-full">
@@ -368,13 +536,101 @@
                                             </div>
                                         </div>
 
-                                        <!-- Employee List -->
+                                        <!-- Week Navigation -->
+                                        <div class="relative shrink-0 w-full mb-4">
+                                            <div class="flex items-center justify-center gap-4">
+                                                <button id="prev-week-office" class="
+                                                    flex items-center justify-center size-10 
+                                                    border border-white/20 rounded-lg 
+                                                    hover:bg-white/10 transition-colors
+                                                    focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black
+                                                " aria-label="Previous week">
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6DDE6" stroke-width="2" aria-hidden="true">
+                                                        <path d="m15 18-6-6 6-6"/>
+                                                    </svg>
+                                                </button>
+                                                <div id="office-week-display" class="text-white font-medium text-center min-w-[200px]">
+                                                    <!-- Week will be displayed here -->
+                                                </div>
+                                                <button id="next-week-office" class="
+                                                    flex items-center justify-center size-10 
+                                                    border border-white/20 rounded-lg 
+                                                    hover:bg-white/10 transition-colors
+                                                    focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black
+                                                " aria-label="Next week">
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6DDE6" stroke-width="2" aria-hidden="true">
+                                                        <path d="m9 18 6-6-6-6"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Legend -->
+                                        <div class="relative shrink-0 w-full mb-4">
+                                            <div class="flex flex-wrap items-center justify-center gap-4 text-xs text-white/60">
+                                                <div class="flex items-center gap-2">
+                                                    <div class="bg-accent rounded-full size-4 flex items-center justify-center text-black text-xs">🏢</div>
+                                                    <span>In Office</span>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <div class="bg-white/10 rounded-full size-4 flex items-center justify-center text-white/60 text-xs">🏠</div>
+                                                    <span>Work from Home</span>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <div class="bg-orange-400 rounded-full size-4 flex items-center justify-center text-black text-xs">🏖️</div>
+                                                    <span>On Vacation</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Office Status Table -->
                                         <div class="relative shrink-0 w-full">
-                                            <div class="
-                                                grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
-                                                gap-4 w-full max-w-6xl
-                                            " id="employee-list">
-                                                <!-- Employee cards will be generated by JavaScript -->
+                                            <div class="bg-white/5 border border-white/10 rounded-lg overflow-hidden">
+                                                <!-- Loading State -->
+                                                <div id="office-table-loading" class="flex items-center justify-center p-8">
+                                                    <div class="spinner mr-3"></div>
+                                                    <span class="text-white/80">Loading office schedule...</span>
+                                                </div>
+                                                
+                                                <!-- Table Content -->
+                                                <div id="office-table-content" class="hidden">
+                                                    <!-- Desktop Table -->
+                                                    <div class="hidden md:block overflow-x-auto">
+                                                        <table class="w-full">
+                                                            <thead class="border-b border-white/10">
+                                                                <tr class="text-left">
+                                                                    <th class="px-4 py-3 text-white font-semibold text-sm min-w-[200px]">Employee</th>
+                                                                    <th id="table-header-mon" class="px-3 py-3 text-white font-semibold text-sm text-center min-w-[80px]">Mon</th>
+                                                                    <th id="table-header-tue" class="px-3 py-3 text-white font-semibold text-sm text-center min-w-[80px]">Tue</th>
+                                                                    <th id="table-header-wed" class="px-3 py-3 text-white font-semibold text-sm text-center min-w-[80px]">Wed</th>
+                                                                    <th id="table-header-thu" class="px-3 py-3 text-white font-semibold text-sm text-center min-w-[80px]">Thu</th>
+                                                                    <th id="table-header-fri" class="px-3 py-3 text-white font-semibold text-sm text-center min-w-[80px]">Fri</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="office-table-body">
+                                                                <!-- Table rows will be generated by JavaScript -->
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- Mobile Cards -->
+                                                    <div class="md:hidden" id="office-mobile-content">
+                                                        <!-- Mobile cards will be generated by JavaScript -->
+                                                    </div>
+                                                </div>
+
+                                                <!-- Error State -->
+                                                <div id="office-table-error" class="hidden flex items-center justify-center p-8">
+                                                    <div class="text-center">
+                                                        <div class="text-red-400 text-sm mb-2">Failed to load office schedule</div>
+                                                        <button id="retry-office-table" class="
+                                                            text-accent text-sm underline hover:no-underline
+                                                            focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black
+                                                        ">
+                                                            Try again
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -434,6 +690,10 @@
         let hasUnsavedChanges = false;
         const maxSelections = 2;
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        
+        // Office table state
+        let currentOfficeWeekStart = getCurrentWeekStart();
+        let officeScheduleData = null;
         const weekdays = [
             { key: 'monday', name: 'Monday', short: 'Mon' },
             { key: 'tuesday', name: 'Tuesday', short: 'Tue' },
@@ -657,24 +917,198 @@
             }
         }
 
-        // Employee List Rendering
-        function renderEmployeeList() {
-            const container = document.getElementById('employee-list');
-            container.innerHTML = OFFICE_EMPLOYEES.map(emp => `
-                <div class="
-                    bg-black rounded-lg border border-white/20 
-                    p-3 hover:bg-white/5 transition-colors
-                ">
-                    <div class="flex gap-3 items-center">
-                        <div class="font-medium text-white text-sm sm:text-[15px] truncate">
-                            ${emp.name}
+        // Office Schedule Table Functions
+        async function loadOfficeSchedule() {
+            showOfficeTableLoading();
+            
+            try {
+                const weekStart = scheduleManager.getWeekStart(currentOfficeWeekStart);
+                const { data, error } = await scheduleManager.getAllUsersWeeklyOfficeStatus(weekStart);
+                
+                if (error) throw error;
+                
+                officeScheduleData = data;
+                updateOfficeWeekDisplay();
+                renderOfficeTable();
+                showOfficeTableContent();
+                
+            } catch (error) {
+                console.error('Failed to load office schedule:', error);
+                showOfficeTableError();
+            }
+        }
+
+        function updateOfficeWeekDisplay() {
+            const weekDisplay = document.getElementById('office-week-display');
+            const startDate = new Date(currentOfficeWeekStart);
+            const endDate = new Date(startDate);
+            endDate.setDate(endDate.getDate() + 4); // Friday
+
+            const startStr = `${months[startDate.getMonth()]} ${startDate.getDate()}`;
+            const endStr = `${months[endDate.getMonth()]} ${endDate.getDate()}, ${endDate.getFullYear()}`;
+            
+            weekDisplay.textContent = `${startStr} - ${endStr}`;
+            
+            // Update table headers with dates
+            if (officeScheduleData && officeScheduleData.weekDays) {
+                officeScheduleData.weekDays.forEach((day, index) => {
+                    const headerId = ['table-header-mon', 'table-header-tue', 'table-header-wed', 'table-header-thu', 'table-header-fri'][index];
+                    const header = document.getElementById(headerId);
+                    if (header) {
+                        const date = new Date(day.date);
+                        header.innerHTML = `
+                            <div class="text-center">
+                                <div class="font-semibold">${day.dayShort}</div>
+                                <div class="text-xs text-white/60">${date.getDate()}</div>
+                            </div>
+                        `;
+                    }
+                });
+            }
+        }
+
+        function renderOfficeTable() {
+            if (!officeScheduleData) return;
+            
+            renderDesktopTable();
+            renderMobileCards();
+        }
+
+        function renderDesktopTable() {
+            const tbody = document.getElementById('office-table-body');
+            if (!tbody || !officeScheduleData) return;
+
+            tbody.innerHTML = officeScheduleData.users.map(userStatus => {
+                const statusCells = userStatus.dailyStatus.map(day => {
+                    let statusClass, statusText, statusLabel;
+                    
+                    if (day.isOnVacation) {
+                        statusClass = 'bg-orange-400 text-black';
+                        statusText = '🏖️';
+                        statusLabel = 'On Vacation';
+                    } else if (day.isInOffice) {
+                        statusClass = 'bg-accent text-black';
+                        statusText = '🏢';
+                        statusLabel = 'In Office';
+                    } else {
+                        statusClass = 'bg-white/10 text-white/60';
+                        statusText = '🏠';
+                        statusLabel = 'Work from Home';
+                    }
+                    
+                    return `
+                        <td class="px-3 py-3 text-center">
+                            <div class="
+                                ${statusClass} 
+                                rounded-full size-8 flex items-center justify-center 
+                                mx-auto text-sm font-medium
+                            " title="${statusLabel}">
+                                ${statusText}
+                            </div>
+                        </td>
+                    `;
+                }).join('');
+
+                return `
+                    <tr class="border-b border-white/5 hover:bg-white/2 transition-colors">
+                        <td class="px-4 py-3">
+                            <div class="min-w-0">
+                                <div class="font-medium text-white text-sm truncate">${userStatus.user.name}</div>
+                                <div class="text-xs text-white/60 truncate">${userStatus.user.email}</div>
+                                ${userStatus.user.department ? `<div class="text-xs text-white/40 truncate">${userStatus.user.department}</div>` : ''}
+                            </div>
+                        </td>
+                        ${statusCells}
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderMobileCards() {
+            const container = document.getElementById('office-mobile-content');
+            if (!container || !officeScheduleData) return;
+
+            container.innerHTML = officeScheduleData.users.map(userStatus => {
+                const statusDays = userStatus.dailyStatus.map(day => {
+                    let statusClass, statusText, statusLabel;
+                    
+                    if (day.isOnVacation) {
+                        statusClass = 'bg-orange-400 text-black';
+                        statusText = '🏖️';
+                        statusLabel = 'Vacation';
+                    } else if (day.isInOffice) {
+                        statusClass = 'bg-accent text-black';
+                        statusText = '🏢';
+                        statusLabel = 'Office';
+                    } else {
+                        statusClass = 'bg-white/10 text-white/60';
+                        statusText = '🏠';
+                        statusLabel = 'WFH';
+                    }
+                    
+                    return `
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="text-xs text-white/60">${day.dayShort}</div>
+                            <div class="
+                                ${statusClass} 
+                                rounded-full size-8 flex items-center justify-center 
+                                text-sm font-medium
+                            " title="${statusLabel}">
+                                ${statusText}
+                            </div>
                         </div>
-                        <div class="font-semibold text-xs text-white/40 truncate">
-                            ${emp.email}
+                    `;
+                }).join('');
+
+                return `
+                    <div class="border-b border-white/10 p-4 last:border-b-0">
+                        <div class="mb-3">
+                            <div class="font-medium text-white text-sm">${userStatus.user.name}</div>
+                            <div class="text-xs text-white/60">${userStatus.user.email}</div>
+                            ${userStatus.user.department ? `<div class="text-xs text-white/40">${userStatus.user.department}</div>` : ''}
+                        </div>
+                        <div class="flex justify-between items-center gap-2">
+                            ${statusDays}
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        function showOfficeTableLoading() {
+            document.getElementById('office-table-loading').classList.remove('hidden');
+            document.getElementById('office-table-content').classList.add('hidden');
+            document.getElementById('office-table-error').classList.add('hidden');
+        }
+
+        function showOfficeTableContent() {
+            document.getElementById('office-table-loading').classList.add('hidden');
+            document.getElementById('office-table-content').classList.remove('hidden');
+            document.getElementById('office-table-error').classList.add('hidden');
+        }
+
+        function showOfficeTableError() {
+            document.getElementById('office-table-loading').classList.add('hidden');
+            document.getElementById('office-table-content').classList.add('hidden');
+            document.getElementById('office-table-error').classList.remove('hidden');
+        }
+
+        function setupOfficeTableEventListeners() {
+            // Week navigation
+            document.getElementById('prev-week-office').addEventListener('click', () => {
+                currentOfficeWeekStart.setDate(currentOfficeWeekStart.getDate() - 7);
+                loadOfficeSchedule();
+            });
+
+            document.getElementById('next-week-office').addEventListener('click', () => {
+                currentOfficeWeekStart.setDate(currentOfficeWeekStart.getDate() + 7);
+                loadOfficeSchedule();
+            });
+
+            // Retry button
+            document.getElementById('retry-office-table').addEventListener('click', () => {
+                loadOfficeSchedule();
+            });
         }
 
         // Day Selector Functionality
@@ -929,13 +1363,18 @@
                 
                 // Render initial UI
                 updateWeekDisplay();
-                await renderEmployeeList();
+                await loadOfficeSchedule();
                 updateSelectionCounter();
                 updateSaveButtonState();
                 
                 // Setup interactions
                 setupEventListeners();
                 setupKeyboardNavigation();
+                setupOfficeTableEventListeners();
+                setupVacationEventListeners();
+                
+                // Load vacation status
+                await updateVacationStatus();
                 
                 // Setup real-time updates
                 setupRealtimeUpdates();
@@ -988,27 +1427,18 @@
             }
         }
 
+        // Legacy function - now handled by loadOfficeSchedule
         async function renderEmployeeList() {
-            try {
-                const currentDate = new Date(currentWeekStart);
-                const { data: weekData } = await scheduleManager.getWeeklyOfficeAttendance(scheduleManager.getWeekStart(currentDate));
-                
-                if (weekData && weekData.length > 0) {
-                    // Update the office attendance view with real data
-                    console.log('Office attendance data:', weekData);
-                    // You can implement the employee list rendering here
-                }
-            } catch (error) {
-                console.error('Failed to load office attendance:', error);
-            }
+            // Redirect to new office schedule table
+            await loadOfficeSchedule();
         }
 
         function setupRealtimeUpdates() {
             // Subscribe to office attendance updates
             realtimeManager.subscribeToOfficeAttendance(async (payload) => {
                 console.log('Office attendance updated:', payload);
-                // Refresh the employee list
-                await renderEmployeeList();
+                // Refresh the office schedule table
+                await loadOfficeSchedule();
             });
 
             // Subscribe to user's own schedule updates
@@ -1018,7 +1448,251 @@
                         console.log('User schedule updated:', payload);
                         // Refresh current schedule if it affects current week
                         loadWeeklyScheduleFromBackend();
+                        // Also refresh office table if the change affects the displayed week
+                        loadOfficeSchedule();
                     });
+                }
+            });
+        }
+
+        // ===============================
+        // VACATION MANAGEMENT FUNCTIONS
+        // ===============================
+
+        // Vacation modal management
+        function openVacationModal() {
+            const modal = document.getElementById('vacationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Load existing vacation data
+            loadCurrentVacation();
+            
+            // Focus on start date input
+            setTimeout(() => {
+                document.getElementById('vacationStartDate').focus();
+            }, 100);
+        }
+
+        function closeVacationModal() {
+            const modal = document.getElementById('vacationModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            
+            // Clear form
+            clearVacationForm();
+        }
+
+        function clearVacationForm() {
+            document.getElementById('vacationStartDate').value = '';
+            document.getElementById('vacationEndDate').value = '';
+            document.getElementById('vacationNotes').value = '';
+            document.getElementById('vacationSummary').classList.add('hidden');
+            document.getElementById('clearVacationBtn').classList.add('hidden');
+        }
+
+        // Load current vacation from backend
+        async function loadCurrentVacation() {
+            try {
+                const vacation = await scheduleManager.getCurrentVacation();
+                if (vacation) {
+                    // Populate form with existing data
+                    document.getElementById('vacationStartDate').value = vacation.start_date;
+                    document.getElementById('vacationEndDate').value = vacation.end_date;
+                    document.getElementById('vacationNotes').value = vacation.notes || '';
+                    document.getElementById('clearVacationBtn').classList.remove('hidden');
+                    
+                    // Update summary
+                    updateVacationSummary();
+                }
+            } catch (error) {
+                console.error('Failed to load current vacation:', error);
+            }
+        }
+
+        // Update vacation status display
+        async function updateVacationStatus() {
+            try {
+                const vacation = await scheduleManager.getCurrentVacation();
+                const noVacationMessage = document.getElementById('noVacationMessage');
+                const vacationDetails = document.getElementById('vacationDetails');
+                
+                if (vacation && vacation.start_date && vacation.end_date) {
+                    const startDate = new Date(vacation.start_date);
+                    const endDate = new Date(vacation.end_date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    
+                    // Check if vacation is active, upcoming, or past
+                    const isActive = today >= startDate && today <= endDate;
+                    const isUpcoming = today < startDate;
+                    
+                    if (isActive || isUpcoming) {
+                        noVacationMessage.classList.add('hidden');
+                        vacationDetails.classList.remove('hidden');
+                        
+                        // Update dates display
+                        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                        const startStr = startDate.toLocaleDateString('en-US', options);
+                        const endStr = endDate.toLocaleDateString('en-US', options);
+                        document.getElementById('vacationDates').textContent = `${startStr} - ${endStr}`;
+                        
+                        // Calculate days
+                        const diffTime = Math.abs(endDate - startDate);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                        document.getElementById('vacationDaysCount').textContent = `${diffDays} day${diffDays > 1 ? 's' : ''}`;
+                        
+                        // Update status indicator
+                        const statusIndicator = vacationDetails.querySelector('.w-3.h-3');
+                        const statusText = vacationDetails.querySelector('.text-sm.font-medium');
+                        
+                        if (isActive) {
+                            statusIndicator.className = 'w-3 h-3 bg-orange-400 rounded-full';
+                            statusText.className = 'text-sm font-medium text-orange-400';
+                            statusText.textContent = 'On Vacation';
+                        } else {
+                            statusIndicator.className = 'w-3 h-3 bg-blue-400 rounded-full';
+                            statusText.className = 'text-sm font-medium text-blue-400';
+                            statusText.textContent = 'Vacation Scheduled';
+                        }
+                    } else {
+                        // Past vacation
+                        noVacationMessage.classList.remove('hidden');
+                        vacationDetails.classList.add('hidden');
+                    }
+                } else {
+                    noVacationMessage.classList.remove('hidden');
+                    vacationDetails.classList.add('hidden');
+                }
+            } catch (error) {
+                console.error('Failed to update vacation status:', error);
+            }
+        }
+
+        // Update vacation summary in modal
+        function updateVacationSummary() {
+            const startDate = document.getElementById('vacationStartDate').value;
+            const endDate = document.getElementById('vacationEndDate').value;
+            
+            if (startDate && endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                
+                if (end >= start) {
+                    const diffTime = Math.abs(end - start);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                    
+                    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                    const startStr = start.toLocaleDateString('en-US', options);
+                    const endStr = end.toLocaleDateString('en-US', options);
+                    
+                    document.getElementById('vacationSummaryText').textContent = 
+                        `${diffDays} day${diffDays > 1 ? 's' : ''} vacation from ${startStr} to ${endStr}`;
+                    document.getElementById('vacationSummary').classList.remove('hidden');
+                } else {
+                    document.getElementById('vacationSummary').classList.add('hidden');
+                }
+            } else {
+                document.getElementById('vacationSummary').classList.add('hidden');
+            }
+        }
+
+        // Save vacation to backend
+        async function saveVacation() {
+            const startDate = document.getElementById('vacationStartDate').value;
+            const endDate = document.getElementById('vacationEndDate').value;
+            const notes = document.getElementById('vacationNotes').value.trim();
+            
+            if (!startDate || !endDate) {
+                showToast('Please select both start and end dates.', 'error', 3000);
+                return;
+            }
+            
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            
+            if (end < start) {
+                showToast('End date must be after start date.', 'error', 3000);
+                return;
+            }
+            
+            const saveButton = document.getElementById('saveVacationBtn');
+            const spinner = document.getElementById('vacationSaveSpinner');
+            
+            // Show loading state
+            saveButton.disabled = true;
+            spinner.classList.remove('hidden');
+            
+            try {
+                await scheduleManager.saveVacation(startDate, endDate, notes);
+                
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                
+                showToast(`Vacation saved! ${diffDays} day${diffDays > 1 ? 's' : ''} scheduled.`, 'success', 4000);
+                
+                closeVacationModal();
+                await updateVacationStatus();
+                await loadOfficeSchedule(); // Refresh table to show vacation status
+                
+            } catch (error) {
+                console.error('Save vacation error:', error);
+                showToast('Failed to save vacation. Please try again.', 'error', 4000);
+            } finally {
+                saveButton.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        }
+
+        // Clear vacation
+        async function clearVacation() {
+            if (!confirm('Are you sure you want to clear your vacation? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                await scheduleManager.clearVacation();
+                showToast('Vacation cleared successfully.', 'success', 3000);
+                
+                closeVacationModal();
+                await updateVacationStatus();
+                await loadOfficeSchedule(); // Refresh table
+                
+            } catch (error) {
+                console.error('Clear vacation error:', error);
+                showToast('Failed to clear vacation. Please try again.', 'error', 4000);
+            }
+        }
+
+        // Setup vacation event listeners
+        function setupVacationEventListeners() {
+            // Modal triggers
+            document.getElementById('setVacationBtn').addEventListener('click', openVacationModal);
+            document.getElementById('closeVacationModal').addEventListener('click', closeVacationModal);
+            document.getElementById('cancelVacationBtn').addEventListener('click', closeVacationModal);
+            
+            // Form interactions
+            document.getElementById('vacationStartDate').addEventListener('change', updateVacationSummary);
+            document.getElementById('vacationEndDate').addEventListener('change', updateVacationSummary);
+            
+            // Save and clear actions
+            document.getElementById('saveVacationBtn').addEventListener('click', saveVacation);
+            document.getElementById('clearVacationBtn').addEventListener('click', clearVacation);
+            
+            // Close modal on backdrop click
+            document.getElementById('vacationModal').addEventListener('click', (e) => {
+                if (e.target.id === 'vacationModal') {
+                    closeVacationModal();
+                }
+            });
+            
+            // ESC key to close modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('vacationModal');
+                    if (!modal.classList.contains('hidden')) {
+                        closeVacationModal();
+                    }
                 }
             });
         }
@@ -1045,8 +1719,8 @@
                 const dayNames = selectedDays.map(day => day.charAt(0).toUpperCase() + day.slice(1));
                 showToast(`Schedule saved! WFH days: ${dayNames.join(', ')}`, 'success', 4000);
                 
-                // Refresh office attendance
-                await renderEmployeeList();
+                // Refresh office schedule table
+                await loadOfficeSchedule();
                 
             } catch (error) {
                 console.error('Save error:', error);
