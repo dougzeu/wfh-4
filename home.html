@@ -418,7 +418,17 @@
         ];
 
         // Global variables
-        let currentWeekStart = new Date(2025, 4, 25); // May 25, 2025 (month is 0-indexed)
+        function getCurrentWeekStart() {
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const monday = new Date(today);
+            // Calculate days back to Monday (1 = Monday)
+            const daysToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+            monday.setDate(today.getDate() - daysToMonday);
+            return monday;
+        }
+        
+        let currentWeekStart = getCurrentWeekStart(); // Start from current week
         let selectedDays = ['tuesday']; // Initially Tuesday is selected
         let hasUnsavedChanges = false;
         const maxSelections = 2;
