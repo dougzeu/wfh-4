@@ -1,0 +1,117 @@
+---
+description: Design, visuals, typography, colors, spacing, layout, interactions, navigation, forms, feedback, states, usability, mobile, error, architecture
+globs: 
+alwaysApply: false
+---
+# UX Best Practices
+
+## Core Principles
+
+### User-Centered Design
+- Always prioritize user needs over technical convenience
+- Design for accessibility from the beginning (WCAG 2.1 AA compliance)
+- Use inclusive design principles that work for diverse users
+- Conduct user research and usability testing when possible
+
+### Consistency & Standards
+- Maintain consistent visual hierarchy throughout the application
+- Use established design patterns and conventions
+- Ensure consistent spacing, typography, and color usage
+- Follow platform-specific design guidelines (iOS, Android, Web)
+
+## Visual Design
+
+### Typography
+- Use a maximum of 2-3 font families per project
+- Establish a clear typographic scale (H1, H2, H3, body, caption)
+- Ensure sufficient contrast ratios (4.5:1 for normal text, 3:1 for large text)
+- Use readable font sizes (minimum 16px for body text on mobile)
+
+### Color & Contrast
+- Create a cohesive color palette with primary, secondary, and accent colors
+- Use color purposefully to convey meaning and hierarchy
+- Ensure sufficient contrast for accessibility
+- Avoid using color as the only way to convey information
+
+### Spacing & Layout
+- Use consistent spacing units (8px grid system recommended)
+- Implement proper visual hierarchy with whitespace
+- Ensure adequate touch targets (minimum 44px on mobile)
+- Use responsive design principles for all screen sizes
+
+## Interaction Design
+
+### Navigation
+- Keep navigation simple and intuitive
+- Provide clear visual feedback for current location
+- Use familiar navigation patterns (breadcrumbs, tabs, menus)
+- Ensure easy access to main functionality within 3 clicks
+
+### Forms
+- Use clear, descriptive labels for all form fields
+- Provide real-time validation with helpful error messages
+- Group related fields logically
+- Minimize the number of required fields
+- Use appropriate input types for different data
+
+### Feedback & States
+- Provide immediate feedback for user actions
+- Show loading states for operations that take time
+- Use clear success, error, and warning messages
+- Implement proper empty states with helpful guidance
+
+## Performance & Usability
+
+### Loading & Performance
+- Optimize for fast loading times (target <3 seconds)
+- Use skeleton screens or progressive loading
+- Optimize images and assets for different screen densities
+- Implement proper caching strategies
+
+### Mobile-First Design
+- Design for mobile devices first, then scale up
+- Use touch-friendly interaction patterns
+- Consider thumb zones for mobile navigation
+- Test on actual devices, not just desktop browsers
+
+### Error Handling
+- Provide clear, actionable error messages
+- Avoid technical jargon in user-facing messages
+- Offer solutions or next steps when errors occur
+- Use inline validation to prevent errors before submission
+
+## Content Strategy
+
+### Writing & Microcopy
+- Use clear, concise language that users understand
+- Write in active voice when possible
+- Be consistent with terminology throughout the app
+- Provide helpful placeholder text and instructions
+
+### Information Architecture
+- Organize content logically and intuitively
+- Use familiar categorization and labeling
+- Implement effective search functionality
+- Provide multiple ways to find information
+
+## Accessibility
+
+### Keyboard Navigation
+- Ensure all interactive elements are keyboard accessible
+- Provide visible focus indicators
+- Implement logical tab order
+- Support keyboard shortcuts for power users
+
+### Screen Readers
+- Use semantic HTML elements properly
+- Provide alt text for all meaningful images
+- Use ARIA labels and descriptions when necessary
+- Test with actual screen reading software
+
+### Motor Accessibility
+- Provide adequate spacing between interactive elements
+- Avoid requiring precise timing or coordination
+- Offer alternatives to gesture-based interactions
+- Support voice control when possible
+
+Remember: Good UX is invisible - users should be able to accomplish their goals without thinking about the interface.

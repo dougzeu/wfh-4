@@ -1,0 +1,137 @@
+---
+description: Tailwind CSS
+globs: 
+alwaysApply: false
+---
+# Tailwind CSS Best Practices
+
+## Setup and Configuration
+
+### Initial Setup
+- Install Tailwind CSS via npm: `npm install -D tailwindcss`
+- Create config file: `npx tailwindcss init`
+- Add Tailwind directives to main CSS file:
+  ```css
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  ```
+- Configure content paths in `tailwind.config.js` to include all template files
+- Use CLI build process: `npx tailwindcss -i ./src/input.css -o ./src/output.css --watch`
+
+### Editor Setup
+- Install Tailwind CSS IntelliSense plugin for VS Code
+- Use PostCSS language support for custom at-rules (@tailwind, @apply, @screen)
+- Disable native CSS linting if conflicts occur with Tailwind syntax
+
+## Development Best Practices
+
+### Utility-First Approach
+- **DO**: Use utility classes directly in HTML: `class="text-3xl font-bold text-blue-600"`
+- **DON'T**: Create custom CSS classes for simple styling
+- **DO**: Combine utilities for complex layouts: `class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md"`
+
+### Responsive Design
+- Use mobile-first approach with responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
+- Example: `class="text-sm md:text-base lg:text-lg"`
+- Always test on multiple screen sizes
+- Use container classes and responsive utilities consistently
+
+### Interactive States
+- Use state modifiers for hover, focus, active states: `hover:`, `focus:`, `active:`
+- Example: `class="bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300"`
+- Apply focus states for accessibility: `focus:outline-none focus:ring-2`
+
+### Dark Mode
+- Use `dark:` modifier for dark mode variants
+- Example: `class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white"`
+- Consider both light and dark states for all components
+
+### Color and Spacing Consistency
+- Stick to Tailwind's default color palette and spacing scale
+- Use semantic color names: `text-gray-600`, `bg-blue-500`, `border-red-300`
+- Maintain consistent spacing: `p-4`, `m-2`, `space-y-4`
+
+### Component Organization
+- **DO**: Extract complex components using `@apply` directive when necessary:
+  ```css
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:ring-2 focus:ring-blue-300;
+  }
+  ```
+- **DON'T**: Overuse `@apply` - prefer utility classes in HTML
+- Group related utilities logically: layout → spacing → colors → typography
+
+### Performance Optimization
+- Use PurgeCSS/content configuration to remove unused styles
+- Configure `tailwind.config.js` content paths accurately
+- Avoid writing custom CSS when Tailwind utilities exist
+- Use `@layer` directive for custom styles:
+  ```css
+  @layer components {
+    .custom-component {
+      @apply /* utilities */;
+    }
+  }
+  ```
+
+### Accessibility
+- Always include focus states: `focus:ring-2 focus:ring-offset-2`
+- Use proper color contrast ratios
+- Include screen reader text with `sr-only` class
+- Maintain semantic HTML structure regardless of visual styling
+
+### Code Organization
+- Keep class lists readable by breaking long ones into multiple lines
+- Use consistent ordering: layout → spacing → sizing → colors → typography → effects
+- Example:
+  ```html
+  <div class="
+    flex items-center justify-between
+    p-4 m-2
+    w-full h-16
+    bg-white border border-gray-200
+    text-sm font-medium text-gray-900
+    rounded-lg shadow-sm
+  ">
+  ```
+
+### Custom Configuration
+- Extend theme in `tailwind.config.js` for project-specific values:
+  ```js
+  module.exports = {
+    theme: {
+      extend: {
+        colors: {
+          'brand': '#your-color',
+        },
+        fontFamily: {
+          'custom': ['Your Font', 'sans-serif'],
+        }
+      }
+    }
+  }
+  ```
+
+### Common Patterns
+- **Card Component**: `bg-white rounded-lg shadow-md p-6 border border-gray-200`
+- **Button Primary**: `px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:ring-2 focus:ring-blue-300`
+- **Input Field**: `w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`
+- **Flexbox Layout**: `flex items-center justify-between` or `flex flex-col space-y-4`
+
+### Testing and Debugging
+- Use browser dev tools to test responsive breakpoints
+- Verify color contrast for accessibility compliance
+- Test keyboard navigation and focus states
+- Use Tailwind's built-in debugging classes: `debug-screens`
+
+### Migration and Maintenance
+- Keep Tailwind CSS updated to latest version
+- Review and update custom configurations periodically
+- Document any custom utilities or components
+- Use consistent naming conventions for custom classes
+
+## File References
+- Main HTML files: [index.html](mdc:index.html), [home.html](mdc:home.html)
+- Configuration should be in `tailwind.config.js` (create if needed)
+- CSS input file should contain Tailwind directives
