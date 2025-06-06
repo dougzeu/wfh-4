@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .face-outline { 
+      stroke: #A7EE43; 
+      stroke-width: 3; 
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @media (prefers-color-scheme: dark) {
+      .face-outline { stroke: #A7EE43; }
+    }
+  </style>
+  <!-- Happy face circle -->
+  <circle cx="16" cy="16" r="13" class="face-outline"/>
+  <!-- Eyes -->
+  <path d="M11.33 12.32c-.53.64-1.25 1-2 1s-1.47-.36-2-1" class="face-outline"/>
+  <path d="M22.67 12.32c-.53.64-1.25 1-2 1s-1.47-.36-2-1" class="face-outline"/>
+  <!-- Smile -->
+  <path d="M10.67 18.67s2 2.67 5.33 2.67 5.33-2.67 5.33-2.67" class="face-outline"/>
+</svg> 
